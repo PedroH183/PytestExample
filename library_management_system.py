@@ -9,15 +9,13 @@ class BookStatus(Enum):
     MAINTENANCE = "maintenance"
     LOST = "lost"
 
-
 class UserRole(Enum):
     ADMIN = "admin"
     LIBRARIAN = "librarian"
     MEMBER = "member"
 
-
 class Book:
-    def __init__(self, title, author, isbn, publication_year, category):
+    def __init__( self, title, author, isbn, publication_year, category ):
         self.id = str(uuid.uuid4())
         self.title = title
         self.author = author
@@ -28,14 +26,14 @@ class Book:
         self.added_date = datetime.now()
         self.last_updated = datetime.now()
 
-    def update_status(self, new_status):
+    def update_status( self, new_status ):
         if not isinstance(new_status, BookStatus):
             raise TypeError("Status must be a BookStatus enum")
         self.status = new_status
         self.last_updated = datetime.now()
         return True
 
-    def to_dict(self):
+    def to_dict( self ):
         return {
             "id": self.id,
             "title": self.title,
@@ -50,7 +48,7 @@ class Book:
 
 
 class User:
-    def __init__(self, name, email, role=UserRole.MEMBER):
+    def __init__( self, name, email, role=UserRole.MEMBER ):
         self.id = str(uuid.uuid4())
         self.name = name
         self.email = email
@@ -150,7 +148,7 @@ class LibrarySystem:
         self.books[book.id] = book
         return book.id
 
-    def update_book(self, book_id, **kwargs):
+    def update_book( self, book_id, **kwargs ):
         if book_id not in self.books:
             raise ValueError("Book not found")
 
